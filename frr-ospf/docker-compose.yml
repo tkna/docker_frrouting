@@ -1,0 +1,53 @@
+version: "3"
+services:
+        alpine1:
+                build: ./alpine1
+                container_name: alpine1
+                hostname: alpine1
+                networks:
+                        - net1
+                init: true
+                privileged: true
+        alpine2:
+                build: ./alpine2
+                container_name: alpine2
+                hostname: alpine2
+                networks:
+                        - net3
+                init: true
+                privileged: true
+        frr1:
+                build: ./frr1
+                container_name: frr1
+                hostname: frr1
+                networks:
+                        - net1
+                        - net2
+                privileged: true
+        frr2:
+                build: ./frr2
+                container_name: frr2
+                hostname: frr2
+                networks:
+                        - net2
+                        - net3
+                privileged: true
+networks:
+        net1:
+                driver: bridge
+                ipam:
+                        driver: default
+                        config:
+                                - subnet: 172.18.0.0/16
+        net2:
+                driver: bridge
+                ipam:
+                        driver: default
+                        config:
+                                - subnet: 172.19.0.0/16
+        net3:
+                driver: bridge
+                ipam:
+                        driver: default
+                        config:
+                                - subnet: 172.20.0.0/16
