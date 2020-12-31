@@ -70,19 +70,6 @@ O>* 172.20.0.0/16 [110/20] via 172.19.0.2, eth1, weight 1, 00:01:11
 frr1# exit
 / # exit
 
-# docker exec -it alpine2 /bin/sh
-/ # ip a
-1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1000
-    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-    inet 127.0.0.1/8 scope host lo
-       valid_lft forever preferred_lft forever
-287: eth0@if288: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 1500 qdisc noqueue state UP
-    link/ether 02:42:ac:14:00:02 brd ff:ff:ff:ff:ff:ff
-    inet 172.20.0.2/16 brd 172.20.255.255 scope global eth0
-       valid_lft forever preferred_lft forever
-       
-/ # exit
-
 # docker exec -it alpine1 /bin/sh
 / # ping 172.20.0.2
 PING 172.20.0.2 (172.20.0.2): 56 data bytes
