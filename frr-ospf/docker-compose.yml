@@ -24,6 +24,9 @@ services:
                         - net1
                         - net2
                 privileged: true
+                depends_on:
+                        - "alpine1"
+                        - "alpine2"
         frr2:
                 build: ./frr2
                 container_name: frr2
@@ -32,6 +35,10 @@ services:
                         - net2
                         - net3
                 privileged: true
+                depends_on:
+                        - "alpine1"
+                        - "alpine2"
+                        - "frr1"
 networks:
         net1:
                 driver: bridge
