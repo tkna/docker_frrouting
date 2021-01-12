@@ -1,0 +1,39 @@
+#!/bin/sh
+
+set -e
+
+# Delete all IP addresses on ethX
+devlist=`ip -o addr | cut -d\  -f 2 | sed '1d'`
+for dev in $devlist
+do
+  IP=`ip -o addr show $dev | cut -d\  -f 7`
+  ip addr del $IP dev $dev
+done
+
+# Delete all routes
+routelist=`ip route | cut -d\  -f 1`
+for route in $routelist
+do
+  ip route del $route
+done
+
+# Create VRFs
+ip link add CUSTA type vrf table 10
+ip link add CUSTB type vrf table 20
+ip link set CUSTA up
+ip link set CUSTB up
+ip link set eth1 master CUSTA
+ip link set eth2 master CUSTB
+
+# Enable MPLS Forwarding
+sysctl -w net.mpls.conf.eth0.input=1
+sysctl -w net.mpls.platform_labels=100000
+
+##
+# For volume mounts...
+##
+chown -R frr:frr /etc/frr || true
+/usr/lib/frr/frrinit.sh start
+
+# Sleep forever
+exec tail -f /dev/null

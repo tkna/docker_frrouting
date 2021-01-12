@@ -1,0 +1,28 @@
+#!/bin/sh
+
+set -e
+
+# Delete all IP addresses on ethX
+devlist=`ip -o addr | cut -d\  -f 2 | sed '1d'`
+for dev in $devlist
+do
+  IP=`ip -o addr show $dev | cut -d\  -f 7`
+  ip addr del $IP dev $dev
+done
+
+# Delete all routes
+routelist=`ip route | cut -d\  -f 1`
+for route in $routelist
+do
+  ip route del $route
+done
+
+
+##
+# For volume mounts...
+##
+chown -R frr:frr /etc/frr || true
+/usr/lib/frr/frrinit.sh start
+
+# Sleep forever
+exec tail -f /dev/null

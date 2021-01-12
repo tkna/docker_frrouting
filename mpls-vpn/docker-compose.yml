@@ -1,0 +1,106 @@
+version: "3"
+services:
+        PR:
+                build: ./PR
+                image: frr_pr
+                container_name: PR
+                hostname: PR
+                networks:
+                        - net1
+                        - net2
+                privileged: true
+        PE1:
+                build: ./PE1
+                image: frr_pe1
+                container_name: PE1
+                hostname: PE1
+                networks:
+                        - net1
+                        - net3
+                        - net5
+                privileged: true
+        PE2:
+                build: ./PE2
+                image: frr_pe2
+                container_name: PE2
+                hostname: PE2
+                networks:
+                        - net2
+                        - net4
+                        - net6
+                privileged: true
+        CE1:
+                build: ./CE1
+                image: frr_ce1
+                container_name: CE1
+                hostname: CE1
+                networks:
+                        - net3
+                privileged: true
+        CE2:
+                build: ./CE2
+                image: frr_ce2
+                container_name: CE2
+                hostname: CE2
+                networks:
+                        - net4
+                privileged: true
+        CE3:
+                build: ./CE3
+                image: frr_ce3
+                container_name: CE3
+                hostname: CE3
+                networks:
+                        - net5
+                privileged: true
+        CE4:
+                build: ./CE4
+                image: frr_ce4
+                container_name: CE4
+                hostname: CE4
+                networks:
+                        - net6
+                privileged: true
+networks:
+        net1:
+                name: net1
+                driver: bridge
+                ipam:
+                        driver: default
+                        config:
+                                - subnet: 10.1.1.0/24
+        net2:
+                name: net2
+                driver: bridge
+                ipam:
+                        driver: default
+                        config:
+                                - subnet: 10.1.2.0/24
+        net3:
+                name: net3
+                driver: bridge
+                ipam:
+                        driver: default
+                        config:
+                                - subnet: 172.16.1.0/24
+        net4:
+                name: net4
+                driver: bridge
+                ipam:
+                        driver: default
+                        config:
+                                - subnet: 172.16.2.0/24
+        net5:
+                name: net5
+                driver: bridge
+                ipam:
+                        driver: default
+                        config:
+                                - subnet: 172.16.3.0/24
+        net6:
+                name: net6
+                driver: bridge
+                ipam:
+                        driver: default
+                        config:
+                                - subnet: 172.16.4.0/24
