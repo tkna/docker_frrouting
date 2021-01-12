@@ -9,8 +9,6 @@ MPLS-VPN using FRRouting on Docker (docker-compose version)
 # 前提条件
 
 ```
-# docker ps
-CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 # docker network ls
 NETWORK ID          NAME                DRIVER              SCOPE
 f7691e525fcd        bridge              bridge              local
