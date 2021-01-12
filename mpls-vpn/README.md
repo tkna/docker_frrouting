@@ -55,7 +55,7 @@ f3245984c514        frr_ce1             "/sbin/tini -- /usr/…"   28 seconds ag
 Wait for route and label exchange (about 1 min)
 
 ```
- docker exec -it CE1 /bin/sh
+# docker exec -it CE1 /bin/sh
 / # ping -I 192.168.1.1 192.168.2.1
 PING 192.168.2.1 (192.168.2.1) from 192.168.1.1: 56 data bytes
 64 bytes from 192.168.2.1: seq=0 ttl=62 time=0.478 ms
