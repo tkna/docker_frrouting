@@ -1,5 +1,6 @@
 # What's this?
 [Docker上のFRRoutingでMPLS-VPNを動かしてみる](https://qiita.com/tk_n/items/06c388164491ad634c7e)をdocker-compose化したものです。
+
 MPLS-VPN using FRRouting on Docker (docker-compose version)
 
 ![](mpls-vpn.png)
@@ -8,9 +9,9 @@ MPLS-VPN using FRRouting on Docker (docker-compose version)
 # 前提条件
 
 ```
-oot@ubuntu-bionic:~/docker_frrouting/mpls-vpn# docker ps
+# docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-root@ubuntu-bionic:~/docker_frrouting/mpls-vpn# docker network ls
+# docker network ls
 NETWORK ID          NAME                DRIVER              SCOPE
 f7691e525fcd        bridge              bridge              local
 5df12997a7cf        host                host                local
@@ -50,6 +51,7 @@ f3245984c514        frr_ce1             "/sbin/tini -- /usr/…"   28 seconds ag
 ```
 
 経路交換、ラベル交換が終わるまで1分ほど待機
+
 Wait for route and label exchange (about 1 min)
 
 ```
